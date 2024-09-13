@@ -13,4 +13,9 @@ class Question extends Model
 	{
 		return $this->hasMany(Tweet::class);
 	}
+
+	public function question()
+	{
+		return $this->belongsTo(Question::class);
+	}
 }

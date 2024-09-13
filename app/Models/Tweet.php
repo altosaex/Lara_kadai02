@@ -10,13 +10,7 @@ class Tweet extends Model
 	use HasFactory;
 
 	// protected $fillable = ['tweet'];
-	protected $fillable = ['question_id', 'tweet', 'user_id'];
-
-	// 🔽 追加
-	public function question()
-	{
-		return $this->belongsTo(Question::class);
-	}
+	protected $fillable = ['question', 'tweet', 'user_id'];
 
 	public function user()
 	{
@@ -31,5 +25,10 @@ class Tweet extends Model
 	public function comments()
 	{
 		return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+	}
+
+	public function question()
+	{
+		return $this->belongsTo(Question::class);
 	}
 }

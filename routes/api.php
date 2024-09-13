@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\TweetController;
 use App\Http\Controllers\Api\TweetLikeController;
 // 🔽 1行追加
 use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\QuestionController;
 
 // 🔽 追加
 Route::post('/register', [AuthController::class, 'register']);
@@ -29,4 +30,10 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::post('/tweets/{tweet}/like', [TweetLikeController::class, 'store']);
 	Route::delete('/tweets/{tweet}/like', [TweetLikeController::class, 'destroy']);
 	Route::apiResource('tweets.comments', CommentController::class);
+	// 質問を更新するルート
+
+	Route::middleware('auth:sanctum')->put('/questions/{id}', [QuestionController::class, 'update']);
+});
+Route::middleware('auth:sanctum')->group(function () {
+	Route::apiResource('questions', QuestionController::class);
 });

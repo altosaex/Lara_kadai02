@@ -51,8 +51,10 @@ class TweetController extends Controller
 	{
 		$request->validate([
 			'tweet' => 'required|string|max:255',
+			'question_id' => 'sometimes|exists:questions,id',
 		]);
-		$tweet->update($request->all());
+		// 更新するフィールドを動的に指定
+		$tweet->update($request->only('tweet', 'question_id'));
 
 		return response()->json($tweet);
 	}
